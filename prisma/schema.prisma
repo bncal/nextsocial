@@ -1,0 +1,35 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+
+    id          Int             @id @default(autoincrement())
+    email       String          @unique
+    username    String          @unique                                 // @username
+    password    String
+    fname       String                                                  // The displayed "full name" above @username
+    posts       Post[]
+    isOfficial  Boolean         @default(false)                         // Is this user an official account?
+    isModerator Boolean         @default(false)                         // Is this user a moderator?
+    isBanned    Boolean         @default(false)                         // Is this user banned?
+    bannedUntil DateTime?                                               // If banned, when will the ban expire?
+    createdAt   DateTime        @default(now())
+
+}
+
+model Post {
+
+    id        Int     @id @default(autoincrement())
+    text      String
+    media     String?                                                   // The media file (image, video, etc.)
+    author    User    @relation(fields: [authorId], references: [id])   // The author of the post
+    authorId  Int
+    createdAt DateTime @default(now())
+}
+
