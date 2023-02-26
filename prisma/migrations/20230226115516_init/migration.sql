@@ -3,6 +3,7 @@ CREATE TABLE `User` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `email` VARCHAR(191) NOT NULL,
     `username` VARCHAR(191) NOT NULL,
+    `password` VARCHAR(191) NOT NULL,
     `fname` VARCHAR(191) NOT NULL,
     `isOfficial` BOOLEAN NOT NULL DEFAULT false,
     `isModerator` BOOLEAN NOT NULL DEFAULT false,
