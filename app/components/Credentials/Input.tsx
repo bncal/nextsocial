@@ -3,7 +3,7 @@ import { ICredentialInputProps, ICredentialButtonProps} from "@/app/interfaces/i
 
 /**
  * This input is used for credentials such email and password in login and register page.
- * Do not use this input for other purposes.
+ * Do not use this input for other purposes. See: https://reactjs.org/docs/forwarding-refs.html
  * @param type - type of input
  * @param placeholder - placeholder of input
  * @param rest - rest of props
@@ -20,6 +20,16 @@ const CredentialInput = React.forwardRef(({type, placeholder, label, explanation
         </>
     )
 });
+
+/**
+ * This button is used to submit credentials in login and register page.
+ * Do not use this button for other purposes. See: https://reactjs.org/docs/forwarding-refs.html
+ * @param type -  React.ButtonHTMLAttributes<T>.type?: "submit" | "reset" | "button" | undefined
+ * @param text - text
+ * @param rest - rest of props
+ * @returns {JSX.Element}
+ * 
+ */
 
 const CredentialButton = React.forwardRef(({type, text, ...rest} : ICredentialButtonProps, ref: LegacyRef<HTMLButtonElement>) => {
 
