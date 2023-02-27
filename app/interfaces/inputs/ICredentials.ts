@@ -3,6 +3,7 @@ export interface ICredentialInputProps {
     name: string;
     placeholder: string;
     label?: string;
+    err?: string;
     explanation?: string;
 }
 
