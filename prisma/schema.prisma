@@ -15,8 +15,9 @@ model User {
     id          Int             @id @default(autoincrement())
     email       String          @unique
     username    String          @unique                                 // @username
+    dateOfBirth DateTime?       @default(now()) @db.Date
     password    String
-    fname       String                                                  // The displayed "full name" above @username
+    fname       String?                                                  // The displayed "full name" above @username
     posts       Post[]
     isOfficial  Boolean         @default(false)                         // Is this user an official account?
     isModerator Boolean         @default(false)                         // Is this user a moderator?

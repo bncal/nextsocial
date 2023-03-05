@@ -26,7 +26,6 @@ const CredentialInput = React.forwardRef(({type, placeholder, label, err, explan
         <div className="">
             <label className={labelClass}>{label}</label>
             <input className={inputClass} type={type} placeholder={placeholder} ref={ref} {...rest}/>
-            <p className={errorClass}>{err}</p>
         </div>
     )
 });

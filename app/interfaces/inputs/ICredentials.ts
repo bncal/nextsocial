@@ -8,7 +8,7 @@ export interface ICredentialInputProps {
 }
 
 export interface ICredentialButtonProps {
-    type: 'submit' | 'reset' | 'button' | undefined;
+    type: 'submit' | 'reset' | 'button';
     text: string;
 }
 
