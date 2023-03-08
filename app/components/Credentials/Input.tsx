@@ -70,10 +70,10 @@ const CredentialCheckbox = React.forwardRef(({text, tos, tosLink} : ICredentialC
 
 const CredentialDOB = React.forwardRef(({placeholder, ...rest} : ICredentialDOBProps, ref: LegacyRef<HTMLInputElement>) => { 
 
-    const  inputClass = "py-3 px-3 inline-flex border-1 border-gray-200 rounded-md text-sm dark:text-gray-400 w-72 drop-shadow-sm w-full text-center";    
+    const  inputClass = "py-3 text-center inline-flex border-1 border-gray-200 rounded-md text-sm dark:text-gray-400 w-72 drop-shadow-sm w-full text-center";    
     return (
         <>
-            <input className={inputClass} type="text" placeholder={placeholder} ref={ref} {...rest}/>            
+            <input className={inputClass} type="date" ref={ref} {...rest}/>            
         </>
     )
 });

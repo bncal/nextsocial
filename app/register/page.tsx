@@ -1,7 +1,6 @@
 'use client'
 import Image from 'next/image';
 import { useForm} from 'react-hook-form';
-
 import {CredentialButton, CredentialCheckbox, CredentialDOB, CredentialInput} from '../components/Credentials/Input';
 import { CREDENTIAL_ERRORS } from '../enumerators/credentials/errors';
 import isSlur from '../helpers/badwords';
@@ -12,7 +11,8 @@ const RegisterPage: React.FC =  () => {
         defaultValues: {
             username: '',
             email: '',
-            password: ''
+            password: '',
+            dob: '',
         }
     });
     const watchUserName = watch("username");
@@ -25,7 +25,7 @@ const RegisterPage: React.FC =  () => {
             
                 
                 onSubmit={handleSubmit(async (data) => {
-
+                    console.log(data);
                     const res = await fetch('http://localhost:3000/api/user', {
                         method: 'POST',
                         headers: {
@@ -40,6 +40,7 @@ const RegisterPage: React.FC =  () => {
                 {errors.username?.type === 'required' && <p className='text-sm font-semibold text-red-600 mt-2'>{CREDENTIAL_ERRORS.REQUIRED_USERNAME}</p>}
                 {errors.username?.type === 'minLength' && <p className='text-sm font-semibold text-red-600 mt-2'>{CREDENTIAL_ERRORS.MIN_LENGHT_USERNAME}</p>}
                 {isSlur(watchUserName) && <p className='text-sm font-semibold text-red-600 mt-2'>{CREDENTIAL_ERRORS.BANNED_WORD}</p>}
+                
                 <CredentialInput type="email" placeholder="email@domain.it" label='Email'{...register("email", { required: true, pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ })}/>
                 {errors.email?.type === 'required' && <p className='text-sm font-semibold text-red-600 mt-2'>{CREDENTIAL_ERRORS.REQUIRED_EMAIL}</p>}
                 {errors.email?.type === 'pattern' && <p className='text-sm font-semibold text-red-600 mt-2'>{CREDENTIAL_ERRORS.INVALID_EMAIL}</p>}
@@ -50,10 +51,8 @@ const RegisterPage: React.FC =  () => {
                 {errors.password?.type === 'minLength' && <p className='text-sm font-semibold text-red-600 mt-2'>{CREDENTIAL_ERRORS.MIN_LENGHT_PASSWORD}</p>}                
                 
                 <label className='font-semibold text-sm text-gray-800 dark:text-gray-400'>Date of Birth</label>
-                <div className='flex flex-row gap-2 justify-between'>
-                    <CredentialDOB placeholder='dd' ></CredentialDOB>
-                    <CredentialDOB placeholder='mmm' ></CredentialDOB>
-                    <CredentialDOB placeholder='yyyy' ></CredentialDOB>
+                <div className='flex flex-row justify-between'>
+                    <CredentialDOB placeholder='' {...register("dob", {required: true})} />
                 </div>
                 <CredentialCheckbox text="I agree to the" tos="Terms of Service" tosLink="https://www.google.com"></CredentialCheckbox>
                 <CredentialCheckbox text="I agree with the use of the telemetry of my keyboard and mouse inputs, and the use of cookies on our website."></CredentialCheckbox>
@@ -68,9 +67,3 @@ const RegisterPage: React.FC =  () => {
 }
 
 export default RegisterPage;
-
-/*
-
-                {errors.username?.type === 'required' && setUsernameErr("You need to enter am username")}
-                {errors.email?.type === 'required' && setEmailErr("You need to enter an email")}
-                {errors.password?.type === 'required' && setPasswordErr("You need to enter a password")}*/
